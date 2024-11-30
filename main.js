@@ -9,7 +9,7 @@ let lastSearchQuery = null
 let count = 0
 
 const counter = (count) => count === 0 ? basketCounter.textContent = '' : basketCounter.textContent = count
-const nameMovieUrl = (name, url = `http://www.omdbapi.com/?apikey=${key}&`) => `${url}s=${name}`
+const nameMovieUrl = (name, url = `https://www.omdbapi.com/?apikey=${key}&`) => `${url}s=${name}`
 
 const getData = (url) =>
   fetch(url)
