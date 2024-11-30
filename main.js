@@ -64,10 +64,7 @@ const inputSearchHendler = (e) => {
     if (!searchQuery || searchQuery.length < 4 || searchQuery === lastSearchQuery) return
 
     getData(nameMovieUrl(searchQuery))
-      .then((movies) => movies.forEach((movie) => {
-        console.log(movie)
-        createCardMovies(movie)
-      }))
+      .then((movies) => movies.forEach((movie) => createCardMovies(movie)))
       .catch((err) => moviesList.innerHTML = err)
 
     lastSearchQuery = searchQuery
@@ -113,7 +110,7 @@ const removeOutsideBasket = (movie) => {
 const removeFromBasket = (movieBasket) => {
   const imdbId = movieBasket.dataset.imdbId
   const movie = document.querySelector(`.movie[data-imdb-id= ${imdbId}]`)
-  movie.classList.toggle('active')
+  movie && movie.classList.toggle('active')
   movieBasket.remove()
   counter(--count)
 }
