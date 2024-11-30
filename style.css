@@ -1,0 +1,178 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+body {
+  height: 1vh;
+  padding: 100px 0;
+  background-color: #d4dbe2;
+}
+
+.container {
+  width: min(100% - 40px, 1280px);
+  margin-inline: auto;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  background-color: #58545b;
+}
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-content__btn,
+.header-content__btn:active {
+  font-size: 1.5rem;
+  background-color: #d4dbe2;
+}
+
+.header-content__btn:hover {
+  background-color: #453c41;
+  color: white;
+}
+
+.search-panel {
+  background-color: #58545b;
+}
+.search-input {
+  border: 1px solid #000;
+  height: 40px;
+  margin-bottom: 50px;
+  padding: 0 10px;
+  width: 300px;
+}
+.search-panel .input-group-text {
+  background-color: #b7a7ae;
+}
+
+.movies-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  text-align: center;
+  padding-bottom: 100px;
+}
+
+.movie {
+  position: relative;
+  background: #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  aspect-ratio: 1/1.5;
+  padding: 20px;
+  border: 1px solid #fff;
+}
+.movie__img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  inset: 0;
+  transition: 0.3s ease-in-out;
+  opacity: 1;
+}
+
+.movie__img + .movie-overlay {
+  opacity: 0;
+}
+.movie-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: 0.3s ease-in-out;
+  color: #fff;
+  padding: 40px 25px 20px;
+}
+.movie.active .movie-overlay,
+.movie:hover .movie-overlay {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.movie__title {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.5rem;
+}
+
+.movie-add-btn {
+  display: block;
+  font-size: 5rem;
+  opacity: 0.5;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.movie-add-btn:hover {
+  opacity: 1;
+}
+
+.movie.active .movie-add-btn {
+  color: red;
+  opacity: 1;
+}
+.movie-add-btn.active:hover {
+  opacity: 0.8;
+}
+
+.basket-content:empty::before {
+  content: "Немає вибраних фільмів";
+}
+
+.movie-basket {
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid #000;
+  padding: 10px 0 10px 10px;
+  align-items: center;
+  gap: 15px;
+  margin: 10px 0;
+}
+
+.movie-basket__img {
+  width: 50px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+span.movie-basket__img {
+  text-align: center;
+  font-size: 1.5rem;
+  background-color: #ccc;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movie-basket__del {
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 10px;
+  transition: 0.3s ease-in-out;
+  color: #000;
+}
+
+.movie-basket__del:hover {
+  color: red;
+}
