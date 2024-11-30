@@ -70,7 +70,6 @@ const inputSearchHendler = (e) => {
     lastSearchQuery = searchQuery
     moviesList.innerHTML = ''
   }, 1500)
-
 }
 
 const addToBasket = (movie) => {
