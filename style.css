@@ -15,11 +15,6 @@ body {
   background-color: #d4dbe2;
 }
 
-.container {
-  width: min(100% - 40px, 1280px);
-  margin-inline: auto;
-}
-
 .header {
   position: fixed;
   top: 0;
@@ -34,6 +29,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 15px;
+}
+.header-content__btn {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 5px;
 }
 .header-content__btn,
 .header-content__btn:active {
@@ -175,4 +177,16 @@ span.movie-basket__img {
 
 .movie-basket__del:hover {
   color: red;
+}
+
+@media (max-width: 768px) {
+  .movie .movie-overlay {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .movies-list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    padding-bottom: 40px;
+  }
 }
