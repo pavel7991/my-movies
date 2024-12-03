@@ -11,13 +11,12 @@ let count = 0
 const counter = (count) => count === 0 ? basketCounter.textContent = '' : basketCounter.textContent = count
 const nameMovieUrl = (name, url = `https://www.omdbapi.com/?apikey=${key}&`) => `${url}s=${name}`
 
-const getData = (url) =>
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      if (!data || !data.Search) throw ('The server returned incorrect data')
-      return data.Search
-    })
+const getData = async (url) => {
+  const res = await fetch(url)
+  const data = await res.json()
+  if (!data || !data.Search) throw new Error('The server returned incorrect data')
+  return data.Search
+}
 
 const debounceTime = (() => {
   let timer = null
@@ -38,7 +37,7 @@ const createCardMovies = ({ Poster: poster, Title: title, Year: year, imdbID }) 
   movie.classList.add('movie')
   movie.dataset.imdbId = imdbID
 
-  if (/^https\:\/\/[\s\S]+/.test(poster)) {
+  if (/^https?:\/\/.+$/.test(poster)) {
     const img = document.createElement('img')
     img.classList.add('movie__img')
     img.src = poster
@@ -56,9 +55,7 @@ const createCardMovies = ({ Poster: poster, Title: title, Year: year, imdbID }) 
   moviesList.append(movie)
 }
 
-
-
-const inputSearchHendler = (e) => {
+const inputSearchHandler = (e) => {
   debounceTime(() => {
     const searchQuery = e.target.value.trim()
     if (!searchQuery || searchQuery.length < 4 || searchQuery === lastSearchQuery) return
@@ -101,14 +98,14 @@ const addToBasket = (movie) => {
 const removeOutsideBasket = (movie) => {
   movie.classList.toggle('active')
   const imdbId = movie.dataset.imdbId
-  const movieBasket = document.querySelector(`.movie-basket[data-imdb-id=${imdbId}]`)
+  const movieBasket = document.querySelector(`.movie-basket[data-imdb-id="${imdbId}"]`)
   movieBasket.remove()
   counter(--count)
 }
 
 const removeFromBasket = (movieBasket) => {
   const imdbId = movieBasket.dataset.imdbId
-  const movie = document.querySelector(`.movie[data-imdb-id= ${imdbId}]`)
+  const movie = document.querySelector(`.movie[data-imdb-id="${imdbId}"]`)
   movie && movie.classList.toggle('active')
   movieBasket.remove()
   counter(--count)
@@ -122,6 +119,6 @@ const initListener = (e) => {
   target.classList.contains('movie-basket__del') && removeFromBasket(target.closest('.movie-basket'))
 }
 
-searchInput.addEventListener('input', inputSearchHendler)
+searchInput.addEventListener('input', inputSearchHandler)
 document.addEventListener('click', initListener)
 
